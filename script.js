@@ -44,21 +44,21 @@ canvas.width = window.innerWidth;
 canvas.height = window.innerHeight;
 
 // Boid configuration
-const NUM_BOIDS = 55;
+const NUM_BOIDS = 85;
 const BOID_SIZE = 2.5;
-const MAX_SPEED = 5;
-const MAX_FORCE = 0.25;
+const MAX_SPEED = 6;
+const MAX_FORCE = 0.35;
 
 // Boid behavior weights
-const SEPARATION_WEIGHT = 5.0;
-const ALIGNMENT_WEIGHT = 2.0;
+const SEPARATION_WEIGHT = 5.2;
+const ALIGNMENT_WEIGHT = 3.0;
 const COHESION_WEIGHT = 4.0;
 const ATTRACTION_WEIGHT = 1.0;
 
 // Perception radii
-const SEPARATION_RADIUS = 150;
-const ALIGNMENT_RADIUS = 100;
-const COHESION_RADIUS = 70;
+const SEPARATION_RADIUS = 80;
+const ALIGNMENT_RADIUS = 50;
+const COHESION_RADIUS = 120;
 const ATTRACTION_RADIUS = 300;
 
 class Boid {
