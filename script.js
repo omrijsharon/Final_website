@@ -61,6 +61,13 @@ const ALIGNMENT_RADIUS = 50;
 const COHESION_RADIUS = 120;
 const ATTRACTION_RADIUS = 500;
 
+// Bad particle configuration
+const BAD_PARTICLE_SIZE = BOID_SIZE * 2; // Twice as big as boids
+const BAD_PARTICLE_KILL_RADIUS = 5; // Boids destroyed within 5px
+const badParticles = [];
+let longPressTimer = null;
+const LONG_PRESS_DURATION = 500; // 500ms for long press
+
 class Boid {
     constructor() {
         this.position = {
@@ -238,7 +245,35 @@ class Boid {
             vec.x = (vec.x / mag) * max;
             vec.y = (vec.y / mag) * max;
         }
-        return vec;
+        return vec;    }
+}
+
+// Bad Particle class
+class BadParticle {
+    constructor(x, y) {
+        this.position = { x, y };
+        this.pulsePhase = Math.random() * Math.PI * 2; // Random starting phase
+    }
+
+    show(time) {
+        // Pulsing glow effect (oscillates between 10 and 30)
+        const pulseGlow = 20 + Math.sin(time * 0.005 + this.pulsePhase) * 10;
+        
+        // Draw the bad particle with pulsing green glow
+        ctx.fillStyle = '#000000';
+        ctx.shadowBlur = pulseGlow;
+        ctx.shadowColor = '#00ff00';
+        ctx.beginPath();
+        ctx.arc(this.position.x, this.position.y, BAD_PARTICLE_SIZE, 0, Math.PI * 2);
+        ctx.fill();
+        ctx.shadowBlur = 0;
+    }
+
+    checkCollision(boid) {
+        const dx = this.position.x - boid.position.x;
+        const dy = this.position.y - boid.position.y;
+        const distance = Math.sqrt(dx * dx + dy * dy);
+        return distance < BAD_PARTICLE_KILL_RADIUS;
     }
 }
 
@@ -256,12 +291,35 @@ function animateBoids() {
     // Draw connections between boids and their 3 closest neighbors
     drawConnections();
 
-    // Update and draw boids
-    for (let boid of boids) {
-        boid.edges();
-        boid.flock(boids, smoothX, smoothY);
-        boid.update();
-        boid.show();
+    // Get current time for pulsing effect
+    const currentTime = Date.now();
+
+    // Draw bad particles
+    for (let particle of badParticles) {
+        particle.show(currentTime);
+    }
+
+    // Update and draw boids, check for collisions with bad particles
+    for (let i = boids.length - 1; i >= 0; i--) {
+        let boid = boids[i];
+        
+        // Check collision with bad particles
+        let destroyed = false;
+        for (let particle of badParticles) {
+            if (particle.checkCollision(boid)) {
+                boids.splice(i, 1); // Remove the boid
+                destroyed = true;
+                break;
+            }
+        }
+        
+        // Only update and show if not destroyed
+        if (!destroyed) {
+            boid.edges();
+            boid.flock(boids, smoothX, smoothY);
+            boid.update();
+            boid.show();
+        }
     }
 
     requestAnimationFrame(animateBoids);
@@ -449,4 +507,38 @@ navLinks.forEach(link => {
     link.addEventListener('mouseleave', () => {
         isHoveringNav = false;
     });
+});
+
+// ====== BAD PARTICLE CREATION ======
+
+// Right-click to create bad particle
+document.addEventListener('contextmenu', (e) => {
+    e.preventDefault(); // Prevent context menu
+    badParticles.push(new BadParticle(e.clientX, e.clientY));
+});
+
+// Long-press for mobile (touchstart/touchend)
+document.addEventListener('touchstart', (e) => {
+    const touch = e.touches[0];
+    const touchX = touch.clientX;
+    const touchY = touch.clientY;
+    
+    longPressTimer = setTimeout(() => {
+        badParticles.push(new BadParticle(touchX, touchY));
+        longPressTimer = null;
+    }, LONG_PRESS_DURATION);
+});
+
+document.addEventListener('touchend', () => {
+    if (longPressTimer) {
+        clearTimeout(longPressTimer);
+        longPressTimer = null;
+    }
+});
+
+document.addEventListener('touchmove', () => {
+    if (longPressTimer) {
+        clearTimeout(longPressTimer);
+        longPressTimer = null;
+    }
 });

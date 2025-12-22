@@ -41,7 +41,7 @@ body {
 .nav-container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: 0 30px;
+    padding: 0 5vw; /* Responsive padding based on viewport width */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -49,18 +49,18 @@ body {
 
 .nav-logo {
     font-family: 'Courier New', monospace;
-    font-size: 24px;
+    font-size: clamp(18px, 4vw, 24px); /* Responsive font size */
     font-weight: bold;
     color: #00ff00;
     text-decoration: none;
     text-shadow: 0 0 10px #00ff00;
-    letter-spacing: 3px;
+    letter-spacing: clamp(1px, 0.5vw, 3px); /* Responsive letter spacing */
 }
 
 .nav-menu {
     display: flex;
     list-style: none;
-    gap: 40px;
+    gap: clamp(15px, 4vw, 40px); /* Responsive gap: 15px (mobile) to 40px (desktop) */
     margin: 0;
     padding: 0;
 }
@@ -71,18 +71,53 @@ body {
 
 .nav-link {
     font-family: 'Courier New', monospace;
-    font-size: 14px;
+    font-size: clamp(10px, 2.5vw, 14px); /* Responsive font size */
     color: #00ff00;
     text-decoration: none;
     text-transform: uppercase;
-    letter-spacing: 2px;
+    letter-spacing: clamp(1px, 0.3vw, 2px); /* Responsive letter spacing */
     transition: all 0.3s ease;
     opacity: 0.7;
+    white-space: nowrap; /* Prevent text wrapping */
 }
 
 .nav-link:hover {
     opacity: 1;
     text-shadow: 0 0 10px #00ff00;
+}
+
+/* Media Queries for specific breakpoints */
+@media screen and (max-width: 768px) {
+    .navbar {
+        padding: 10px 0;
+    }
+    
+    .nav-container {
+        padding: 0 3vw;
+    }
+    
+    .nav-menu {
+        gap: 3vw; /* Smaller gap on tablets/mobile */
+    }
+}
+
+@media screen and (max-width: 480px) {
+    .navbar {
+        padding: 8px 0;
+    }
+    
+    .nav-container {
+        padding: 0 2vw;
+    }
+    
+    .nav-menu {
+        gap: 2vw; /* Even smaller gap on small phones */
+    }
+    
+    .nav-link {
+        font-size: 9px; /* Minimum readable size */
+        letter-spacing: 0.5px;
+    }
 }
 
 .cursor-line {
@@ -173,12 +208,12 @@ body {
 }
 
 .logo-container {
-    margin-bottom: -30px;
+    margin-bottom: 0px;
     animation: fadeInDown 1s ease-out;
 }
 
 .logo {
-    width: 400px;
+    width: clamp(200px, 60vw, 400px); /* Responsive logo size */
     height: auto;
     filter: drop-shadow(0 0 20px #00ff00);
     opacity: 0.9;
@@ -186,7 +221,7 @@ body {
 
 .product-name {
     font-family: 'Courier New', monospace;
-    font-size: 72px;
+    font-size: clamp(32px, 10vw, 72px); /* Responsive font size */
     font-weight: bold;
     color: #000000;
     text-shadow: 
@@ -194,29 +229,30 @@ body {
         0 0 40px #00ff00,
         0 0 60px #00ff00,
         0 0 80px #00ff00;
-    letter-spacing: 15px;
+    letter-spacing: clamp(5px, 2vw, 15px); /* Responsive letter spacing */
     margin: 0;
 }
 
 .product-subtitle {
     font-family: 'Courier New', monospace;
-    font-size: 32px;
+    font-size: clamp(16px, 4vw, 32px); /* Responsive font size */
     font-weight: 300;
     color: #00ff00;
     text-shadow: 0 0 10px #00ff00;
-    letter-spacing: 8px;
+    letter-spacing: clamp(3px, 1vw, 8px); /* Responsive letter spacing */
     margin: 10px 0 30px 0;
     opacity: 0.8;
 }
 
 .product-description {
     font-family: 'Courier New', monospace;
-    font-size: 16px;
+    font-size: clamp(12px, 2.5vw, 16px); /* Responsive font size */
     color: #00ff00;
     text-shadow: 0 0 5px #00ff00;
-    letter-spacing: 3px;
+    letter-spacing: clamp(1px, 0.5vw, 3px); /* Responsive letter spacing */
     margin: 0;
     opacity: 0.7;
+    padding: 0 5vw; /* Add padding on sides for mobile */
 }
 
 /* Animations */
