@@ -253,14 +253,15 @@ class BadParticle {
     constructor(x, y) {
         this.position = { x, y };
         this.pulsePhase = Math.random() * Math.PI * 2; // Random starting phase
-    }
-
-    show(time) {
-        // Pulsing glow effect (oscillates between 10 and 30)
-        const pulseGlow = 20 + Math.sin(time * 0.005 + this.pulsePhase) * 10;
+    }    show(time) {
+        // Pulsing glow effect at 60 BPM (1 beat per second = 1 Hz)
+        // 60 BPM = 1 beat/second = frequency of 1 Hz
+        // Angular frequency = 2π * frequency = 2π rad/s
+        // Convert time from ms to seconds: time / 1000
+        const pulseGlow = 30 + Math.sin((time / 1000) * 2 * Math.PI + this.pulsePhase) * 20;
         
         // Draw the bad particle with pulsing green glow
-        ctx.fillStyle = '#000000';
+        ctx.fillStyle = '#00ff00'; // Green fill instead of black for better visibility
         ctx.shadowBlur = pulseGlow;
         ctx.shadowColor = '#00ff00';
         ctx.beginPath();
