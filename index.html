@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Matrix Cursor Effect</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">FINAL</a>
+            <ul class="nav-menu">
+                <li class="nav-item">
+                    <a href="#products" class="nav-link">Products</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#technology" class="nav-link">Technology</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#solutions" class="nav-link">Solutions</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#support" class="nav-link">Support</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#contact" class="nav-link">Contact</a>
+                </li>
+            </ul>        </div>
+    </nav>
+
+    <!-- Matrix Background -->
+    <canvas id="matrixCanvas"></canvas>
+
+    <!-- Horizontal lines (left and right of setpoint) -->
+    <div class="cursor-line horizontal horizontal-left" id="horizontalLineLeft"></div>
+    <div class="cursor-line horizontal horizontal-right" id="horizontalLineRight"></div>
+    
+    <!-- Vertical lines (top and bottom of setpoint) -->
+    <div class="cursor-line vertical vertical-top" id="verticalLineTop"></div>
+    <div class="cursor-line vertical vertical-bottom" id="verticalLineBottom"></div>
+    
+    <div class="cursor-square" id="cursorSquare">
+        <div class="cursor-square-inner"></div>
+    </div>
+    <div class="cursor-square mouse-square" id="mouseSquare">
+        <div class="cursor-square-inner mouse-square-inner" id="mouseSquareInner"></div>
+    </div>
+    
+    <!-- Product Section -->
+    <div class="product-section">
+        <div class="logo-container">
+            <img src="final_falcon.svg" alt="Final Falcon Logo" class="logo" id="logo">
+        </div>
+        <h1 class="product-name">FINAL</h1>
+        <h2 class="product-subtitle">Tracking System</h2>
+        <p class="product-description">
+            Autonomous Terminal Guidance for FPV Drones
+        </p>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
