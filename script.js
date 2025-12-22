@@ -49,8 +49,8 @@ canvas.height = window.innerHeight;
 
 // Boid configuration
 const NUM_BOIDS = 85;
-const BOID_SIZE = 2.5;
-const MAX_SPEED = 2;
+const BOID_SIZE = 3.5;
+const MAX_SPEED = 2.0;
 const MAX_FORCE = 0.15;
 const ROTATION_RATE = (360 * Math.PI) / 180; // 720 degrees per second in radians/second
 const FRAME_RATE = 60; // Assuming 60 FPS
@@ -60,11 +60,11 @@ const MAX_ROTATION_PER_FRAME = ROTATION_RATE / FRAME_RATE; // Radians per frame
 const SEPARATION_WEIGHT = 17.2;
 const ALIGNMENT_WEIGHT = 12.0;
 const COHESION_WEIGHT = 8.0;
-const ATTRACTION_WEIGHT = 1.0;
+const ATTRACTION_WEIGHT = 6.0;
 
 // Perception radii
-const SEPARATION_RADIUS = 80;
-const ALIGNMENT_RADIUS = 80;
+const SEPARATION_RADIUS = 90;
+const ALIGNMENT_RADIUS = 100;
 const COHESION_RADIUS = 150;
 const ATTRACTION_RADIUS = 500;
 
@@ -74,26 +74,26 @@ const MUTUAL_DESTRUCTION_RADIUS = 10; // Both boid and bad particle destroyed wi
 const BAD_PARTICLE_ATTRACTION_RADIUS = 400; // Boids attracted from 400px away
 const BAD_PARTICLE_ATTRACTION_FORCE = 22; // Strong attraction force (increased from 6 to 12)
 const BAD_PARTICLE_DETECTION_RADIUS = 120; // Distance to detect bad particles
-const BAD_PARTICLE_MAX_SPEED = 6; // Bad particles move faster than boids
+const BAD_PARTICLE_MAX_SPEED = 4; // Bad particles move faster than boids
 const BAD_PARTICLE_ROTATION_RATE = (720 * Math.PI) / 180; // 720 degrees per second
 const BAD_PARTICLE_MAX_ROTATION_PER_FRAME = BAD_PARTICLE_ROTATION_RATE / FRAME_RATE; // Radians per frame
 const BAD_PARTICLE_ESCAPE_RADIUS = 80; // Flee from boids within this radius
 const BAD_PARTICLE_WALL_REPEL_DISTANCE = 100; // Start repelling when within this distance from walls
-const SIGNAL_DURATION = 150; // Duration of green signal in ms
+const SIGNAL_DURATION = 120; // Duration of green signal in ms
 const SIGNAL_COOLDOWN = 1200; // Cooldown before boid can signal again in ms
 const SIGNAL_PROPAGATION_DELAY = 50; // Delay before propagating signal to neighbors in ms
 const badParticles = [];
 const explosionParticles = [];
 const signalQueue = []; // Queue of pending signal propagations
 let longPressTimer = null;
-const LONG_PRESS_DURATION = 500; // 500ms for long press
+const LONG_PRESS_DURATION = 250; // 250ms for long press
 
 // Explosion configuration
-const EXPLOSION_PARTICLE_COUNT = 51;
-const EXPLOSION_PARTICLE_SIZE = 1.5;
-const EXPLOSION_SPEED_MIN = 2;
-const EXPLOSION_SPEED_MAX = 20;
-const EXPLOSION_LIFETIME = 500; // 500ms
+const EXPLOSION_PARTICLE_COUNT = 101;
+const EXPLOSION_PARTICLE_SIZE = 2.0;
+const EXPLOSION_SPEED_MIN = 1;
+const EXPLOSION_SPEED_MAX = 10;
+const EXPLOSION_LIFETIME = 400; // 400ms
 
 class Boid {
     constructor() {
