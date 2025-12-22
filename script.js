@@ -46,7 +46,7 @@ canvas.height = window.innerHeight;
 // Boid configuration
 const NUM_BOIDS = 85;
 const BOID_SIZE = 2.5;
-const MAX_SPEED = 6;
+const MAX_SPEED = 4;
 const MAX_FORCE = 0.35;
 
 // Boid behavior weights
@@ -59,7 +59,7 @@ const ATTRACTION_WEIGHT = 1.0;
 const SEPARATION_RADIUS = 80;
 const ALIGNMENT_RADIUS = 50;
 const COHESION_RADIUS = 120;
-const ATTRACTION_RADIUS = 300;
+const ATTRACTION_RADIUS = 500;
 
 class Boid {
     constructor() {
