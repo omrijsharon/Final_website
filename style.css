@@ -53,7 +53,10 @@ body {
     font-weight: bold;
     color: #00ff00;
     text-decoration: none;
-    text-shadow: 0 0 10px #00ff00;
+    text-shadow: 
+        0 0 10px #00ff00,
+        0 0 20px #00ff00,
+        0 0 30px #00ff00;
     letter-spacing: clamp(1px, 0.5vw, 3px); /* Responsive letter spacing */
 }
 
@@ -71,18 +74,22 @@ body {
 
 .nav-link {
     font-family: 'Courier New', monospace;
-    font-size: clamp(10px, 2.5vw, 14px); /* Responsive font size */
+    font-size: clamp(14px, 3vw, 18px); /* Increased from 10px-14px to 14px-18px */
     color: #00ff00;
     text-decoration: none;
     text-transform: uppercase;
     letter-spacing: clamp(1px, 0.3vw, 2px); /* Responsive letter spacing */
     transition: all 0.3s ease;
     opacity: 0.7;
+    font-weight: normal;
     white-space: nowrap; /* Prevent text wrapping */
 }
 
-.nav-link:hover {
+.nav-link:hover,
+.nav-link:active,
+.nav-link:focus {
     opacity: 1;
+    font-weight: bold;
     text-shadow: 0 0 10px #00ff00;
 }
 
@@ -216,7 +223,7 @@ body {
 .logo {
     width: clamp(200px, 60vw, 400px); /* Responsive logo size */
     height: auto;
-    filter: drop-shadow(0 0 20px #00ff00);
+    filter: drop-shadow(0 0 30px #00ff00) drop-shadow(0 0 50px #00ff00);
     opacity: 0.9;
 }
 
@@ -229,7 +236,8 @@ body {
         0 0 20px #00ff00,
         0 0 40px #00ff00,
         0 0 60px #00ff00,
-        0 0 80px #00ff00;
+        0 0 80px #00ff00,
+        0 0 100px #00ff00;
     letter-spacing: clamp(5px, 2vw, 15px); /* Responsive letter spacing */
     margin: 0;
 }

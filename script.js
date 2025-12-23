@@ -50,7 +50,7 @@ canvas.height = window.innerHeight;
 // Boid configuration
 const NUM_BOIDS = 85;
 const BOID_SIZE = 3.5;
-const MAX_SPEED = 2.0;
+const MAX_SPEED = 3.0;
 const MAX_FORCE = 0.15;
 const ROTATION_RATE = (360 * Math.PI) / 180; // 720 degrees per second in radians/second
 const FRAME_RATE = 60; // Assuming 60 FPS
@@ -63,7 +63,7 @@ const COHESION_WEIGHT = 8.0;
 const ATTRACTION_WEIGHT = 6.0;
 
 // Perception radii
-const SEPARATION_RADIUS = 90;
+const SEPARATION_RADIUS = 150;
 const ALIGNMENT_RADIUS = 100;
 const COHESION_RADIUS = 150;
 const ATTRACTION_RADIUS = 500;
@@ -73,8 +73,8 @@ const BAD_PARTICLE_SIZE = BOID_SIZE * 2; // Twice as big as boids
 const MUTUAL_DESTRUCTION_RADIUS = 10; // Both boid and bad particle destroyed within 10px
 const BAD_PARTICLE_ATTRACTION_RADIUS = 400; // Boids attracted from 400px away
 const BAD_PARTICLE_ATTRACTION_FORCE = 22; // Strong attraction force (increased from 6 to 12)
-const BAD_PARTICLE_DETECTION_RADIUS = 120; // Distance to detect bad particles
-const BAD_PARTICLE_MAX_SPEED = 4; // Bad particles move faster than boids
+const BAD_PARTICLE_DETECTION_RADIUS = 80; // Distance to detect bad particles
+const BAD_PARTICLE_MAX_SPEED = 5; // Bad particles move faster than boids
 const BAD_PARTICLE_ROTATION_RATE = (720 * Math.PI) / 180; // 720 degrees per second
 const BAD_PARTICLE_MAX_ROTATION_PER_FRAME = BAD_PARTICLE_ROTATION_RATE / FRAME_RATE; // Radians per frame
 const BAD_PARTICLE_ESCAPE_RADIUS = 80; // Flee from boids within this radius
@@ -689,18 +689,17 @@ class ExplosionParticle {
         
         if (lifeRatio <= 0) return false; // Signal particle should be removed
         
-        // Fade opacity from 0.5 to 0 (less transparent, more visible)
-        const opacity = lifeRatio * 0.5;
+        // Fade opacity from 1.0 to 0 (fully visible at birth)
+        const opacity = lifeRatio;
         
-        // Draw explosion particle with trail effect
+        // Draw explosion particle with bright green color, no glow
         ctx.globalAlpha = opacity;
-        ctx.fillStyle = '#00ff00';
-        ctx.shadowBlur = 3 * lifeRatio; // Glow fades with life
-        ctx.shadowColor = '#00ff00';
+        ctx.fillStyle = '#00ff00'; // Bright green
+        ctx.shadowBlur = 0; // No glow
         ctx.beginPath();
         ctx.arc(this.position.x, this.position.y, EXPLOSION_PARTICLE_SIZE, 0, Math.PI * 2);
         ctx.fill();
-        ctx.shadowBlur = 0;
+        
         ctx.globalAlpha = 1.0;
         
         return true; // Particle still alive
